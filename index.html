@@ -1,0 +1,66 @@
+//"# site-cadastro" 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        .red{
+            border-color: red;
+        }
+
+        .green{
+            border-color: greenyellow;
+        }
+
+        table, button, select, input{
+            margin: 0% auto;
+            width: 200px;
+            height: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>Faça seu cadastro</th>
+        </thead>
+        <tbody id="lista">
+            <tr id="name">
+                <td><input type="text" placeholder="Nome" minlength="3" maxlength="50"></td>
+            </tr>
+            <tr id="Sobrenome">
+                <td><input type="text" placeholder="Sobrenome" minlength="3" maxlength="50"></td>
+            </tr>
+            <tr id="idade">
+                <td><input type="number" placeholder="Idade"></td>
+            </tr>
+            <tr id="email">
+                <td><input type="email" placeholder="Email"></td>
+            </tr>
+            <tr id="senha">
+                <td><input type="password" placeholder="Senha"></td>
+            </tr>
+            <tr id="cpf">
+                <td><input type="number" placeholder="CPF"></td>
+            </tr>
+            <tr id="cep">
+                <td><input type="number" placeholder="Cep"></td>
+            </tr>
+        </tbody>
+    </table>
+    <center><select name="" id="Genero">
+        <option value="0" selected></option>
+        <option value="1" >Masculino</option>
+        <option value="2" >Feminino</option>
+        <option value="3" >Outros</option>
+
+    </select></center>
+    <center><button onclick="cadastrar()">Cadastro</button></center>
+
+</body>
+<script src="./script.js"></script>
+</html>
