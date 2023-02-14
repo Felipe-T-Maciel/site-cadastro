@@ -106,11 +106,121 @@ if(verifica!=true){
             verifica = true;
         } else{
             verifica = false;
+            alert('Campos inválidos')
         }
         if(verifica==true){
-            tabela()
+            ImprimiLista()
+            pulaLinha()
+            alert('User adicionado')
+            limpa()
         }
     }
+}
+
+function pulaLinha(){
+    const table = document.createElement('table');
+    const tbody = document.createElement('tbody');
+    
+    const row1 = document.createElement('tr');
+    const cell1_1 = document.createElement('td');
+    const cell0_1 = document.createElement('hr');
+    const cell1_2 = document.createElement('td');
+    const cell9_2 = document.createElement('br');
+
+    row1.appendChild(cell1_1);
+    row1.appendChild(cell0_1);
+    row1.appendChild(cell1_2);
+    row1.appendChild(cell9_2);
+
+    tbody.appendChild(row1);
+
+    table.appendChild(tbody);
+    
+    document.body.appendChild(table);
+
+
+}
+
+function ImprimiLista() {
+    const table = document.createElement('table');
+    const tbody = document.createElement('tbody');
+    
+    const row1 = document.createElement('tr');
+    const cell1_1 = document.createElement('td');
+    cell1_1.textContent = 'Nome: ';
+    const cell1_2 = document.createElement('td');
+    cell1_2.textContent = nome.value;
+    row1.appendChild(cell1_1);
+    row1.appendChild(cell1_2);
+    
+    const row2 = document.createElement('tr');
+    const cell2_1 = document.createElement('td');
+    cell2_1.textContent = 'Sobrenome: ';
+    const cell2_2 = document.createElement('td');
+    cell2_2.textContent = Sobrenome.value;
+    row2.appendChild(cell2_1);
+    row2.appendChild(cell2_2);
+    
+    const row3 = document.createElement('tr');
+    const cell3_1 = document.createElement('td');
+    cell3_1.textContent = 'Idade: ';
+    const cell3_2 = document.createElement('td');
+    cell3_2.textContent = idade.value;
+    row3.appendChild(cell3_1);
+    row3.appendChild(cell3_2);
+    
+    const row4 = document.createElement('tr');
+    const cell4_1 = document.createElement('td');
+    cell4_1.textContent = 'E-mail: ';
+    const cell4_2 = document.createElement('td');
+    cell4_2.textContent = email.value;
+    row4.appendChild(cell4_1);
+    row4.appendChild(cell4_2);
+    
+    const row5 = document.createElement('tr');
+    const cell5_1 = document.createElement('td');
+    cell5_1.textContent = 'Senha: ';
+    const cell5_2 = document.createElement('td');
+    cell5_2.textContent = senha.value;
+    row5.appendChild(cell5_1);
+    row5.appendChild(cell5_2);
+    
+    const row6 = document.createElement('tr');
+    const cell6_1 = document.createElement('td');
+    cell6_1.textContent = 'CEP: ';
+    const cell6_2 = document.createElement('td');
+    cell6_2.textContent = cep.value;
+    row6.appendChild(cell6_1);
+    row6.appendChild(cell6_2);
+    
+    const row7 = document.createElement('tr');
+    const cell7_1 = document.createElement('td');
+    cell7_1.textContent = 'CPF: ';
+    const cell7_2 = document.createElement('td');
+    cell7_2.textContent = cpf.value;
+    row7.appendChild(cell7_1);
+    row7.appendChild(cell7_2);
+    
+    const row8 = document.createElement('tr');
+    const cell8_1 = document.createElement('td');
+    cell8_1.textContent = 'Gênero: ';
+    const cell8_2 = document.createElement('td');
+    cell8_2.textContent = genero.value;
+    row8.appendChild(cell8_1);
+    row8.appendChild(cell8_2);
+    
+    tbody.appendChild(row1);
+    tbody.appendChild(row2);
+    tbody.appendChild(row3);
+    tbody.appendChild(row4);
+    tbody.appendChild(row5);
+    tbody.appendChild(row6);
+    tbody.appendChild(row7);
+    tbody.appendChild(row8);
+    
+    table.appendChild(tbody);
+    
+    document.body.appendChild(table);
 }
 
 function limpa(){
@@ -118,24 +228,8 @@ function limpa(){
     for(var i=0;i<limpa.length;i++){
         if (limpa[i].classList.contains("green")) {
             limpa[i].classList.remove("green");
+            document.querySelector("#Genero"). remove('green')
+            limpa[i].classList = '';
         }
-        limpa[i] = null;
     }
-}
-
-function tabela(){
-
-    var tabela = document.querySelector('tbody')
-
-        var linhaNova = document.createElement('tr')
-       
-        var nome = document.querySelector("#name > td > input[type=text]");
-       
-        var texto = document.createTextNode(nome.value)
-       
-        var elemento = document.createElement('td')
-       
-        elemento.appendChild(texto)
-        linhaNova.appendChild(elemento)
-        tabelas.appendChild(linhaNova)
 }
