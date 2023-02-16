@@ -1,3 +1,13 @@
+let Snome = [];
+let Ssobrenome = [];
+let Sidade = [];
+let Scep = [];
+let Scpf = [];
+let Sgenero = [];
+let Semail = [];
+let Ssenha = [];
+let Contadorusuario = 0;
+
 var nome = document.querySelector("#name > td > input");
 let Sobrenome = document.querySelector("#Sobrenome > td > input[type=text]");
 var idade = document.querySelector("#idade > td > input[type=number]");
@@ -81,14 +91,14 @@ if(verifica!=true){
             cep.classList.add("red")
         }
 
-        if (cpf.value.length == 11){
+        if (validarCPF(cpf.value)) {
             cpfV = true;
-            cpf.classList.remove("red")
-            cpf.classList.add("green")
-        } else {
+            cpf.classList.remove("red");
+            cpf.classList.add("green");
+          } else {
             cpfV = false;
-            cpf.classList.remove("green")
-            cpf.classList.add("red")
+            cpf.classList.remove("green");
+            cpf.classList.add("red");
         }
 
         if (genero.value == 0){
@@ -109,37 +119,42 @@ if(verifica!=true){
             alert('Campos inválidos')
         }
         if(verifica==true){
+            Editar(Contadorusuario);
             ImprimiLista()
-            pulaLinha()
             alert('User adicionado')
             limpa()
+            limpaDeNovo()
         }
     }
 }
 
-function pulaLinha(){
-    const table = document.createElement('table');
-    const tbody = document.createElement('tbody');
-    
-    const row1 = document.createElement('tr');
-    const cell1_1 = document.createElement('td');
-    const cell0_1 = document.createElement('hr');
-    const cell1_2 = document.createElement('td');
-    const cell9_2 = document.createElement('br');
-
-    row1.appendChild(cell1_1);
-    row1.appendChild(cell0_1);
-    row1.appendChild(cell1_2);
-    row1.appendChild(cell9_2);
-
-    tbody.appendChild(row1);
-
-    table.appendChild(tbody);
-    
-    document.body.appendChild(table);
 
 
+function Editar(Contadorusuario){
+    for(let i=Contadorusuario;i<Contadorusuario.length;i++){
+        Snome[i] = nome.value;
+        Ssobrenome[i] = Sobrenome.value;
+        Sidade[i] = idade.value;
+        Scep[i] = cep.value;
+        Scpf[i] = cpf.value;
+        Sgenero[i] = genero.value;
+        Semail[i] = email.value;
+        Ssenha[i] = senha.value;
+    }
+    for(let i=Contadorusuario;i<Contadorusuario.length;i++){
+        nome.value = Snome[i];
+        cep.value = Scep[i];
+        idade.value = Sidade[i];
+        email.value = Semail[i];
+        senha.value = Ssenha[i];
+        Sobrenome.value = Ssobrenome[i];
+        genero.value = Sgenero[i];
+        cpf.value = Scpf[i];
+    }
 }
+
+
+
 
 function ImprimiLista() {
     const table = document.createElement('table');
@@ -181,7 +196,7 @@ function ImprimiLista() {
     const cell5_1 = document.createElement('td');
     cell5_1.textContent = 'Senha: ';
     const cell5_2 = document.createElement('td');
-    cell5_2.textContent = senha.value;
+    cell5_2.textContent = senha.value.split('').map(() => '*');
     row5.appendChild(cell5_1);
     row5.appendChild(cell5_2);
     
@@ -205,9 +220,38 @@ function ImprimiLista() {
     const cell8_1 = document.createElement('td');
     cell8_1.textContent = 'Gênero: ';
     const cell8_2 = document.createElement('td');
-    cell8_2.textContent = genero.value;
+    if(genero.value == 1){
+        cell8_2.textContent = "Masculino";
+    }
+    else if(genero.value == 2){
+        cell8_2.textContent = "Feminino";
+
+    }
+    else if(genero.value == 3){
+        cell8_2.textContent = "Outros";
+
+    }
+    else if(genero.value == 4){
+        cell8_2.textContent = "Não informado";
+
+    }
     row8.appendChild(cell8_1);
     row8.appendChild(cell8_2);
+
+    const row9 = document.createElement('br');
+    const cria7_1 = document.createElement('hr');
+    const cria7_2 = document.createElement('hr');
+    row9.appendChild(cria7_1);
+    row9.appendChild(cria7_2);
+
+    const row10 = document.createElement('tr');
+    const botao_3 = document.createElement('td');
+    const botao_1 = document.createElement('button');
+    botao_1.textContent = "Editar"+ Contadorusuario++;
+    const botao_2 = document.createElement('td');
+    row10.appendChild(botao_2);
+    row10.appendChild(botao_1);
+    row10.appendChild(botao_3);
     
     tbody.appendChild(row1);
     tbody.appendChild(row2);
@@ -217,19 +261,86 @@ function ImprimiLista() {
     tbody.appendChild(row6);
     tbody.appendChild(row7);
     tbody.appendChild(row8);
+    tbody.appendChild(row9);
+    tbody.appendChild(row10);
     
     table.appendChild(tbody);
     
     document.body.appendChild(table);
 }
 
+
 function limpa(){
-    var limpa = document.getElementById("lista").getElementsByTagName("input");
-    for(var i=0;i<limpa.length;i++){
-        if (limpa[i].classList.contains("green")) {
-            limpa[i].classList.remove("green");
-            document.querySelector("#Genero"). remove('green')
-            limpa[i].classList = '';
-        }
+
+    nome.value = "";
+    cep.value = "";
+    idade.value = "";
+    email.value = "";
+    senha.value = "";
+    Sobrenome.value = "";
+    genero.value = 0;
+    cpf.value = "";
+}
+
+function limpaDeNovo(){
+
+    const input = document.getElementsByTagName("input");
+    const select = document.getElementsByTagName("select");
+
+    for(let i=0;i<input.length;i++){
+        var remove = input[i];
+        remove.classList.remove("green");
     }
+    for(let i=0;i<input.length;i++){
+        var removerSelect = select[i];
+        removerSelect.classList.remove("green");
+    }
+
+
+}
+
+
+
+//Pego da net, sorry teacher
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, '');
+  
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+      return false;
+    }
+  
+    let soma = 0;
+    let resto;
+  
+    for (let i = 1; i <= 9; i++) {
+      soma += parseInt(cpf[i - 1]) * (11 - i);
+    }
+  
+    resto = (soma * 10) % 11;
+  
+    if (resto === 10 || resto === 11) {
+      resto = 0;
+    }
+  
+    if (resto !== parseInt(cpf[9])) {
+      return false;
+    }
+  
+    soma = 0;
+  
+    for (let i = 1; i <= 10; i++) {
+      soma += parseInt(cpf[i - 1]) * (12 - i);
+    }
+  
+    resto = (soma * 10) % 11;
+  
+    if (resto === 10 || resto === 11) {
+      resto = 0;
+    }
+  
+    if (resto !== parseInt(cpf[10])) {
+      return false;
+    }
+  
+    return true;
 }
